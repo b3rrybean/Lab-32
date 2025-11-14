@@ -8,11 +8,12 @@ using namespace std;
 const int INITIAL_CARS = 2;
 
 int main() {
-    srand(time(0))
+    srand(time(0));
 
-    deque(Car) tollBooth;
+    deque<Car> tollBooth;
+
     // Initial population of cars
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < INITIAL_CARS; i++) {
         tollBooth.push_back(Car());
     }
 
@@ -21,7 +22,8 @@ int main() {
         cout << "    ";
         c.print();
     }
-    
+     int time = 1;
+     
     // Simulation loop
 
     
