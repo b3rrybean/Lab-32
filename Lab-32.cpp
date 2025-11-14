@@ -6,3 +6,25 @@
 using namespace std;
 
 const int INITIAL_CARS = 2;
+
+int main() {
+    srand(time(0))
+
+    deque(Car) tollBooth;
+    // Initial population of cars
+    for (int i = 0; i < 2; i++) {
+        tollBooth.push_back(Car());
+    }
+
+    cout << "Initial queue:\n";
+    for (Car c : tollBooth) {
+        cout << "    ";
+        c.print();
+    }
+    
+    // Simulation loop
+
+    
+    // Print current queue
+
+}
