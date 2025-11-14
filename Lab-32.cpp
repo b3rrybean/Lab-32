@@ -22,7 +22,9 @@ int main() {
         cout << "    ";
         c.print();
     }
-     int time = 1;
+    cout << endl;
+
+    int time = 1;
 
     // Simulation loop
     while (!tollBooth.empty()) {
@@ -32,7 +34,7 @@ int main() {
             // Car pays and leaves
             Car leaving = tollBooth.front();
             tollBooth.pop_front();
-            cout << "Time: " << time << " Opration: Car paid: ";
+            cout << "Time: " << time << " Operation: Car paid: ";
             leaving.print();
         } else { // prob 45
             // New car joins
