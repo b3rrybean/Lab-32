@@ -30,17 +30,31 @@ int main() {
 
         if (prob <= 55) {
             // Car pays and leaves
-
-
+            Car leaving = tollbooth.front();
+            tollBooth.pop_front();
+            cout <<
+            leaving.print();
         } else { // prob 45
             // New car joins
-
-
+            Car newCar;
+            tollBooth.push_front(newCar);
+            cout <<
+            newCar.print();
         }
 
         // Print current queue
         cout << "Queue:\n";
+        if (tollbooth.empty()) {
+            cout << "   Empty\n";
+        } else {
+            for (Car c : tollBooth) {
+                cout << "    ";
+                c.print();
+            }
+        }
 
+
+        
     }
 
     return 0;
