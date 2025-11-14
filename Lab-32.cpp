@@ -30,21 +30,21 @@ int main() {
 
         if (prob <= 55) {
             // Car pays and leaves
-            Car leaving = tollbooth.front();
+            Car leaving = tollBooth.front();
             tollBooth.pop_front();
-            cout <<
+            cout << "Time: " << time << " Opration: Car paid: ";
             leaving.print();
         } else { // prob 45
             // New car joins
             Car newCar;
-            tollBooth.push_front(newCar);
-            cout <<
+            tollBooth.push_back(newCar);
+            cout << "Time: " << time << " Operation: Joined lane: ";
             newCar.print();
         }
 
         // Print current queue
         cout << "Queue:\n";
-        if (tollbooth.empty()) {
+        if (tollBooth.empty()) {
             cout << "   Empty\n";
         } else {
             for (Car c : tollBooth) {
@@ -53,8 +53,9 @@ int main() {
             }
         }
 
+        cout << endl;
+        time++;
 
-        
     }
 
     return 0;
