@@ -23,10 +23,26 @@ int main() {
         c.print();
     }
      int time = 1;
-     
-    // Simulation loop
 
-    
-    // Print current queue
+    // Simulation loop
+    while (!tollBooth.empty()) {
+        int prob = rand() % 100 + 1; //1-100
+
+        if (prob <= 55) {
+            // Car pays and leaves
+
+
+        } else { // prob 45
+            // New car joins
+
+
+        }
+
+        // Print current queue
+        cout << "Queue:\n";
+
+    }
+
+    return 0;
 
 }
