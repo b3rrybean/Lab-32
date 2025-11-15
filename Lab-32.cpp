@@ -6,58 +6,105 @@
 using namespace std;
 
 const int INITIAL_CARS = 2;
+const int NUM_LANES = 4;
+const int TIME_PERIODS = 20;
+
+const int PROB_PAY = 46;    // 46% pays and leaves
+const int PROB_JOIN = 39;   // 39% new car joins
+const int PROB_SWITCH = 15; // 15% rear car switches lanes
 
 int main() {
     srand(time(0));
 
     deque<Car> tollBooth;
 
-    // Initial population of cars
-    for (int i = 0; i < INITIAL_CARS; i++) {
-        tollBooth.push_back(Car());
+    // Four toll lanes
+    deque<Car> lanes[NUM_LANES];
+
+    // Initialize each lane with 2 cars
+    for (int i = 0; i < NUM_LANES; i++) {
+        for (int j = 0; j < INITIAL_CARS; j++) {
+            lanes[i].push_back(Car());
+        }
     }
 
+    // Print initial queues
     cout << "Initial queue:\n";
-    for (Car c : tollBooth) {
-        cout << "    ";
-        c.print();
+    for (int i = 0; i < NUM_LANES; i++) {
+        cout << "Lane " << (i + 1) << ":\n";
+        for (Car &c : lanes[i]) {
+            cout << "    ";
+            c.print();
+        }
     }
     cout << endl;
 
-    int time = 1;
-
     // Simulation loop
-    while (!tollBooth.empty()) {
-        int prob = rand() % 100 + 1; //1-100
+    for (int t = 1; t <= TIME_PERIODS; t++) {
+        cout << "\nTime: " << t << "\n";
 
-        if (prob <= 55) {
-            // Car pays and leaves
-            Car leaving = tollBooth.front();
-            tollBooth.pop_front();
-            cout << "Time: " << time << " Operation: Car paid: ";
+        for (int i = 0; i < NUM_LANES; i++) {
+
+            // Empty lane rule (50/50)
+            if (lanes[i].empty()) {
+                int coin = rand() % 2;
+                if (coin == 0) {
+                   // New car joins
+                    Car newCar;
+                    lanes[i].push_back(newCar);
+                    cout << "Lane " << (i + 1) << "Joined: ";
+                    newCar.print();
+                } else {
+                    cout << "Lane " << (i + 1) << " remains empty\n";
+                }
+                continue; // Skips normal rules for empty line
+            }
+
+            // Normal rules
+            int r = rand() % 100;
+            cout << " Lane " << (i + 1) << ": ";
+
+            if (r < PROB_PAY) {
+            // Front car pays and leaves
+            Car leaving = lanes[i].front();
+            lanes[i].pop_front();
+            cout << "Lane: " << i + 1 << "Paid: ";
             leaving.print();
-        } else { // prob 45
+        } else if (r < PROB_PAY + PROB_JOIN) {
             // New car joins
             Car newCar;
-            tollBooth.push_back(newCar);
-            cout << "Time: " << time << " Operation: Joined lane: ";
+            lanes[i].push_back(newCar);
+            cout << "Lane: " << i + 1 << " Joined: ";
             newCar.print();
+        } else {
+            // Rear car switches to different lane
+            int targetLane;
+            do {
+                targetLane = rand() % NUM_LANES; // pick a random lane
+            } while (targetLane == i); // can't switch to the same lane
+
+            Car movingCar = lanes[i].back(); // rear car
+            lanes[i].pop_back();
+            lanes[targetLane].push_back(movingCar);
+
+            cout << "Lane " << (i + 1) << " rear car switched to Lane " << (targetLane + 1) << ": ";
+            movingCar.print();
         }
+    }
 
         // Print current queue
-        cout << "Queue:\n";
-        if (tollBooth.empty()) {
-            cout << "   Empty\n";
-        } else {
-            for (Car c : tollBooth) {
-                cout << "    ";
-                c.print();
+        for (int i = 0; i < NUM_LANES; i++) {
+            cout << "Lane: " << i + 1 << "Queue:\n";
+
+            if (lanes[i].empty()) {
+                cout << "       empty\n";
+            } else {
+                for (Car &c : lanes[i]) {
+                    cout << "       ";
+                    c.print();
+                }
             }
         }
-
-        cout << endl;
-        time++;
-
     }
 
     return 0;
