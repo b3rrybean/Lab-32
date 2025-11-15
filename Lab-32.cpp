@@ -46,7 +46,15 @@ int main() {
         for (int i = 0; i < NUM_LANES; i++) {
 
             // empty lane rule (50/50)
-
+            if (lanes[i].empty()) {
+                int coin = rand() % 2;
+                if (coin == 0) {
+                    cout << " Lane " << (i + 1) << ": empty move car here\n";
+                } else {
+                    cout << " Lane " << (i + 1) << ": empty remains empty\n";
+                }
+                continue; // skips normal rules for empty line
+            }
 
             // normal rules
             int r = rand() % 100;
@@ -71,7 +79,7 @@ int main() {
 
         }
     }
-    
+
         // Print current queue
         for (int i = 0; i < NUM_LANES; i++) {
             cout << "Lane: " << i + 1 << "Queue:\n";
