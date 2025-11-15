@@ -19,29 +19,42 @@ int main() {
     deque<Car> tollBooth;
 
     // Four toll lanes
-
+    deque<Car> lanes[NUM_LANES];
 
     // Initialize each lane with 2 cars
-    for (int i = 0; i < INITIAL_CARS; i++) {
-        tollBooth.push_back(Car());
+    for (int i = 0; i < NUM_LANES; i++) {
+        for (int j = 0; j < INITIAL_CARS; j++) {
+            lanes[i].push_back(Car());
+        }
     }
 
     // print initial queues
     cout << "Initial queue:\n";
-    for (Car c : tollBooth) {
-        cout << "    ";
-        c.print();
+    for (int i = 0; i < NUM_LANES; i++) {
+        cout << "Lane " << (i + 1) << ":\n";
+        for (Car &c : lanes[i]) {
+            cout << "    ";
+            c.print();
+        }
     }
     cout << endl;
 
-    int time = 1;
-
     // Simulation loop
-    while (!tollBooth.empty()) {
-        int prob = rand() % 100 + 1; //1-100
+    for (int t = 1; t <= TIME_PERIODS; t++) {
+        cout << "\nTime: " << t << "\n";
 
-        if (prob <= 55) {
-            // Car pays and leaves
+        for (int i = 0; i < NUM_LANES; i++) {
+            // empty lane rule (50/50)
+
+
+        }
+    }
+
+    // normal lane rules
+    int r = rand() % 100;
+
+        if (r < PROB_PAY) {
+            // Front car pays and leaves
             Car leaving = tollBooth.front();
             tollBooth.pop_front();
             cout << "Time: " << time << " Operation: Car paid: ";
