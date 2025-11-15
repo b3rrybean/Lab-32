@@ -81,11 +81,11 @@ int main() {
             int targetLane;
             do {
                 targetLane = rand() % NUM_LANES; // pick a random lane
-            } while (targetLane == 1); // can't switch to the same lane
+            } while (targetLane == i); // can't switch to the same lane
 
             Car movingCar = lanes[i].back(); // rear car
             lanes[i].pop_back();
-            lanes[targetlane].push_back(movingCar);
+            lanes[targetLane].push_back(movingCar);
 
             cout << "Lane " << (i + 1) << " rear car switched to Lane " << (targetLane + 1) << ": ";
             movingCar.print();
