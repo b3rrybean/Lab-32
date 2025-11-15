@@ -44,21 +44,20 @@ int main() {
         cout << "\nTime: " << t << "\n";
 
         for (int i = 0; i < NUM_LANES; i++) {
+
             // empty lane rule (50/50)
 
 
-        }
-        continue;
-    }
+            // normal rules
+            int r = rand() % 100;
 
-    // normal lane rules
-    int r = rand() % 100;
+            cout << " Lane " << (i + 1) << ": ";
 
-        if (r < PROB_PAY) {
+            if (r < PROB_PAY) {
             // Front car pays and leaves
             Car leaving = lanes[i].front();
             lanes[i].pop_front();
-            cout << "Lane: " << i + 1 << "Paid: "
+            cout << "Lane: " << i + 1 << "Paid: ";
             leaving.print();
         } else if (r < PROB_PAY + PROB_JOIN) {
             // New car joins
@@ -71,7 +70,8 @@ int main() {
 
 
         }
-
+    }
+    
         // Print current queue
         for (int i = 0; i < NUM_LANES; i++) {
             cout << "Lane: " << i + 1 << "Queue:\n";
@@ -81,7 +81,7 @@ int main() {
             } else {
                 for (Car &c : lanes[i]) {
                     cout << "       ";
-                    c.print;
+                    c.print();
                 }
             }
         }
