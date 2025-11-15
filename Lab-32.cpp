@@ -6,17 +6,27 @@
 using namespace std;
 
 const int INITIAL_CARS = 2;
+const int NUM_LANES = 4;
+const int TIME_PERIODS = 20;
+
+const int PROB_PAY = 46;    // 46% pays and leaves
+const int PROB_JOIN = 39;   // 39% new car joins
+const int PROB_SWITCH = 15; // 15% rear car switches lanes
 
 int main() {
     srand(time(0));
 
     deque<Car> tollBooth;
 
-    // Initial population of cars
+    // Four toll lanes
+
+
+    // Initialize each lane with 2 cars
     for (int i = 0; i < INITIAL_CARS; i++) {
         tollBooth.push_back(Car());
     }
 
+    // print initial queues
     cout << "Initial queue:\n";
     for (Car c : tollBooth) {
         cout << "    ";
