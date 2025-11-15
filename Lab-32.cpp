@@ -48,6 +48,7 @@ int main() {
 
 
         }
+        continue;
     }
 
     // normal lane rules
@@ -55,32 +56,35 @@ int main() {
 
         if (r < PROB_PAY) {
             // Front car pays and leaves
-            Car leaving = tollBooth.front();
-            tollBooth.pop_front();
-            cout << "Time: " << time << " Operation: Car paid: ";
+            Car leaving = lanes[i].front();
+            lanes[i].pop_front();
+            cout << "Lane: " << i + 1 << "Paid: "
             leaving.print();
-        } else { // prob 45
+        } else if (r < PROB_PAY + PROB_JOIN) {
             // New car joins
             Car newCar;
-            tollBooth.push_back(newCar);
-            cout << "Time: " << time << " Operation: Joined lane: ";
+            lanes[i].push_back(newCar);
+            cout << "Lane: " << i + 1 << " Joined: ";
             newCar.print();
+        } else {
+            // Rear car switches to different lane
+
+
         }
 
         // Print current queue
-        cout << "Queue:\n";
-        if (tollBooth.empty()) {
-            cout << "   Empty\n";
-        } else {
-            for (Car c : tollBooth) {
-                cout << "    ";
-                c.print();
+        for (int i = 0; i < NUM_LANES; i++) {
+            cout << "Lane: " << i + 1 << "Queue:\n";
+
+            if (lanes[i].empty()) {
+                cout << "       empty\n";
+            } else {
+                for (Car &c : lanes[i]) {
+                    cout << "       ";
+                    c.print;
+                }
             }
         }
-
-        cout << endl;
-        time++;
-
     }
 
     return 0;
