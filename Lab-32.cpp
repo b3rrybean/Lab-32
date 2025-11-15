@@ -49,9 +49,13 @@ int main() {
             if (lanes[i].empty()) {
                 int coin = rand() % 2;
                 if (coin == 0) {
-                    cout << " Lane " << (i + 1) << ": empty move car here\n";
+                   // New car joins
+                    Car newCar;
+                    lanes[i].push_back(newCar);
+                    cout << "Lane " << (i + 1) << "Joined: ";
+                    newCar.print();
                 } else {
-                    cout << " Lane " << (i + 1) << ": empty remains empty\n";
+                    cout << "Lane " << (i + 1) << " remains empty\n";
                 }
                 continue; // Skips normal rules for empty line
             }
@@ -97,5 +101,3 @@ int main() {
     return 0;
 
 }
-
-// branched from lab 32
